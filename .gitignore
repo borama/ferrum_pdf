@@ -1,4 +1,5 @@
 /.bundle/
+/.vscode/
 /doc/
 /log/*.log
 /pkg/

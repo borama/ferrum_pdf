@@ -43,8 +43,8 @@ module FerrumPdf
         end
         yield page
       end
-    rescue Ferrum::DeadBrowserError
-      retry
+      # rescue Ferrum::DeadBrowserError
+      # retry
     end
   end
 end
