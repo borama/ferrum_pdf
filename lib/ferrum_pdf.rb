@@ -17,6 +17,7 @@ module FerrumPdf
 
   class << self
     def browser(**options)
+      @browser_options = options
       @browser ||= Ferrum::Browser.new(options)
     end
 
@@ -42,9 +43,12 @@ module FerrumPdf
           page.go_to(url)
         end
         yield page
+      rescue Ferrum::DeadBrowserError
+        sleep 0.1
+        @browser.restart
+        @browser = Ferrum::Browser.new(@browser_options)
+        retry
       end
-      # rescue Ferrum::DeadBrowserError
-      # retry
     end
   end
 end
